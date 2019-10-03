@@ -1,0 +1,31 @@
+spring:
+  kafka:
+    bootstrap-servers: 127.0.0.1:9093,127.0.0.1:9094,127.0.0.1:9095
+    producer:
+      acks: all
+      buffer-memory: 100MB
+      compression-type: snappy
+      retries: 2
+      batch-size: 10240
+      client-id: message-queue
+      bootstrap-servers: 127.0.0.1:9093,127.0.0.1:9094,127.0.0.1:9095
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      bootstrap-servers: 127.0.0.1:9093,127.0.0.1:9094,127.0.0.1:9095
+      enable-auto-commit: false
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: blogGroup
+      client-id: message-consumer
+  datasource:
+    url: jdbc:mysql://localhost:3306/blog?Encoding=utf-8&useSSL=false&ServerTimezone=GMT%2B8
+    username: root
+    password: 729512117
+    driver-class-name: com.mysql.cj.jdbc.Driver
+server:
+  port: 8092
+mybatis:
+  mapper-locations: classpath:mappers/*xml
+  type-aliases-package: com.message.entity
